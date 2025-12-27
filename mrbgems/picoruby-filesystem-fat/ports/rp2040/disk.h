@@ -17,6 +17,29 @@ extern "C" {
 //#define FLASH_SECTOR_SIZE  4096  /* Already defined in hardware/flash.h */
 #define FLASH_SECTOR_COUNT  192 /* Seems FatFS allows 192 as the minimum */
 
+// XIP QSPI Flash size variation
+#ifdef FLASH_XIP_QSPI_SIZE_MB
+// If specified, use the Flash size setting for each.
+//-----------------------------------------------------------------------------
+#if   FLASH_XIP_QSPI_SIZE_MB == 4   /* Settings for 4MB QSPI FLASH on board */
+#undef  FLASH_SECTOR_COUNT
+#define FLASH_SECTOR_COUNT  704     /* 768KB + 2MB */
+//-----------------------------------------------------------------------------
+#elif FLASH_XIP_QSPI_SIZE_MB == 8   /* Settings for 8MB QSPI FLASH on board */
+#undef  FLASH_SECTOR_COUNT
+#define FLASH_SECTOR_COUNT  1728    /* 768KB + 2MB + 4MB */
+//-----------------------------------------------------------------------------
+#elif FLASH_XIP_QSPI_SIZE_MB == 16  /* Settings for 16MB QSPI FLASH on board */
+#undef  FLASH_SECTOR_COUNT
+#define FLASH_SECTOR_COUNT  3584    /* 768KB + 2MB + 4MB + 8MB*/
+//-----------------------------------------------------------------------------
+#endif
+// If the specified number is anything other than 4 8 16, use the 2MiB setting.
+#endif
+
+
+
+
 #define SD_SECTOR_SIZE      512
 /* SD SECTOR COUNT is dynamically decided by SD_disk_ioctl() */
 
