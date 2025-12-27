@@ -6,6 +6,15 @@
 
 #include "../../include/i2c.h"
 
+
+#ifndef PICO_DEFAULT_I2C_SDA_PIN
+#define PICO_DEFAULT_I2C_SDA_PIN 4
+#endif
+#ifndef PICO_DEFAULT_I2C_SCL_PIN
+#define PICO_DEFAULT_I2C_SCL_PIN 5
+#endif
+
+
 #define UNIT_SELECT() \
   do { \
     switch (unit_num) { \
