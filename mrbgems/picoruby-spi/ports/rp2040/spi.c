@@ -6,6 +6,16 @@
 
 #include "../../include/spi.h"
 
+#ifndef PICO_DEFAULT_SPI_SCK_PIN
+#define PICO_DEFAULT_SPI_SCK_PIN 18
+#endif
+#ifndef PICO_DEFAULT_SPI_RX_PIN
+#define PICO_DEFAULT_SPI_RX_PIN 16
+#endif
+#ifndef PICO_DEFAULT_SPI_TX_PIN
+#define PICO_DEFAULT_SPI_TX_PIN 19
+#endif
+
 static int
 bitbang_read_blocking(spi_unit_info_t *unit_info, uint8_t *dst, size_t len)
 {
